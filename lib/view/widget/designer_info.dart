@@ -10,7 +10,7 @@ class DesignerInfo extends StatefulWidget {
   final String date;
   final String money;
   final String title2;
-  
+
   DesignerInfo({
     super.key,
     required this.date,
@@ -27,7 +27,7 @@ class DesignerInfo extends StatefulWidget {
 }
 
 class _DesignerInfoState extends State<DesignerInfo> {
-  
+  bool isShow = false;
   @override
   Widget build(BuildContext context) {
     final double w = ScreenSize.widthFactor(context);
@@ -51,10 +51,12 @@ class _DesignerInfoState extends State<DesignerInfo> {
                 CircleAvatar(
                   radius: 35,
                   backgroundColor: Colors.black.withOpacity(0.1),
-                  child: Center(child: Image.network(widget.image,)),
+                  child: Center(child: Image.network(widget.image)),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                  },
                   icon: Icon(Icons.bookmark_border, size: 30),
                 ),
               ],
@@ -82,10 +84,24 @@ class _DesignerInfoState extends State<DesignerInfo> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text(widget.date), Text(widget.money)],
+              children: [
+                Text(widget.date),
+                Row(
+                  children: [
+                    Text(widget.money ),
+                    Text(
+                      "/Mo",
+                      style: TextStyle(
+                        color: Colors.black.withOpacity(0.5),
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

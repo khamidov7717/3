@@ -15,14 +15,60 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  List<JobModel> jobs = [];
+  TextEditingController _searchController = TextEditingController();
+  TextEditingController _locationController = TextEditingController();
+
+  List<JobModel> allJobs = [];
+  List<JobModel> filteredJobs = [];
+
+  List<JobModel> location = [];
+  List<JobModel> fliteredLocation = [];
+
   @override
   void initState() {
     super.initState();
-    AllJobsController().getData().then((value) {
-      jobs = value;
-      setState(() {});
+    _searchController.addListener(_fillterAll);
+    _loadLocation();
+    _loadJobs();
+  }
+
+  Future<void> _loadJobs() async {
+    allJobs = await AllJobsController().getData();
+    filteredJobs = List.from(allJobs);
+    setState(() {});
+  }
+
+  Future<void> _loadLocation() async {
+    location = await AllJobsController().getData();
+    fliteredLocation = List.from(location);
+    setState(() {});
+  }
+
+  void _fillterAll() {
+    final searchQuery = _searchController.text.toLowerCase();
+    final filteredQuery = _locationController.text.toLowerCase();
+    setState(() {
+      filteredJobs =
+          allJobs.where((test) {
+            final filteredSearch =
+                searchQuery.isEmpty ||
+                test.jobName.toLowerCase().contains(searchQuery);
+            final fliteredLocation =
+                filteredQuery.isEmpty ||
+                test.shortLocation.toLowerCase().contains(filteredQuery);
+            return filteredSearch && fliteredLocation;
+          }).toList();
     });
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_fillterAll);
+    _locationController.removeListener(_fillterAll);
+    _locationController.dispose();
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -47,7 +93,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   IconButton(
                     onPressed: () {},
                     icon: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Navigator.pop(context);
+                      },
                       icon: Icon(Icons.arrow_back_ios, color: Colors.white),
                     ),
                   ),
@@ -57,8 +105,11 @@ class _SearchScreenState extends State<SearchScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
+                      onChanged: (value) => _fillterAll(),
+                      controller: _searchController,
                       decoration: InputDecoration(
                         hintText: "Search",
+
                         prefixIcon: IconButton(
                           onPressed: () {},
                           icon: Icon(Icons.search, color: Color(0xffAAA6B9)),
@@ -77,9 +128,11 @@ class _SearchScreenState extends State<SearchScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
+                      onChanged: (value) => _fillterAll(),
+                      controller: _locationController,
+
                       decoration: InputDecoration(
                         hintText: "Location",
-
                         prefixIcon: Icon(
                           Icons.location_on_sharp,
                           color: Color(0xffFF9228),
@@ -139,21 +192,22 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: 1,
+              itemCount: filteredJobs.length,
               itemBuilder: (context, index) {
+                final job = filteredJobs[index];
+                print(job);
                 return Column(
-                  spacing: 15,
                   children: [
-                    for (var i in jobs)
+                    for (var i in filteredJobs)
                       DesignerInfo(
                         date:
-                            """${DateTime.now().difference(i.time).inDays != 0 ? DateTime.now().difference(i.time).inDays : DateTime.now().difference(i.time).inHours} ${DateTime.now().difference(i.time).inDays != 0 ? "days ago" : "hours ago"}""",
-                        image: i.companyImage,
-                        money: i.salary,
-                        subTitle: "${i.shortLocation} ",
-                        title1: i.jobTile,
-                        title2: i.jobInfo,
-                        title: i.jobName,
+                            """${DateTime.now().difference(job.time).inDays != 0 ? DateTime.now().difference(job.time).inDays : DateTime.now().difference(job.time).inHours} ${DateTime.now().difference(job.time).inDays != 0 ? "days ago" : "hours ago"}""",
+                        image: job.companyImage,
+                        money: job.salary,
+                        subTitle: "${job.shortLocation} ",
+                        title1: job.jobTile,
+                        title2: job.jobInfo,
+                        title: job.jobName,
                       ),
                   ],
                 );
