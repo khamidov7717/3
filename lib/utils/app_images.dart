@@ -36,10 +36,15 @@ class AppImages {
   static const icon_filter = "assets/svgs/Icon filter.svg";
   static const arrow_back_icon = "assets/svgs/Ba.svg";
   static const google_1 = "assets/svgs/google_1.svg";
+  static const apply = "assets/svgs/Apply Now.svg";
+
+  
+
 
   // img
   // // // // // //
   static const login = 'assets/images/Login.png';
   static const google = 'assets/images/google 2.png';
   static const grouph75 = 'assets/images/Group 75.png';
+  static const Mapp = "assets/images/Map.png";
 }

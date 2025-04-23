@@ -50,14 +50,19 @@ class _DesignerInfoState extends State<DesignerInfo> {
               children: [
                 CircleAvatar(
                   radius: 35,
-                  backgroundColor: Colors.black.withOpacity(0.1),
+
                   child: Center(child: Image.network(widget.image)),
                 ),
                 IconButton(
                   onPressed: () {
-
+                    setState(() {
+                      isShow = !isShow;
+                    });
                   },
-                  icon: Icon(Icons.bookmark_border, size: 30),
+                  icon: Icon(
+                    isShow ? Icons.bookmark : Icons.bookmark_border,
+                    size: 30,
+                  ),
                 ),
               ],
             ),
@@ -91,7 +96,7 @@ class _DesignerInfoState extends State<DesignerInfo> {
                 Text(widget.date),
                 Row(
                   children: [
-                    Text(widget.money ),
+                    Text(widget.money),
                     Text(
                       "/Mo",
                       style: TextStyle(

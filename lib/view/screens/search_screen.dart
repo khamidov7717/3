@@ -4,6 +4,7 @@ import 'package:top_jobs/controller/all_job_controller/all_jobs_controller.dart'
 import 'package:top_jobs/model/admins/job_model.dart';
 import 'package:top_jobs/utils/app_images.dart';
 import 'package:top_jobs/utils/screen_size_utils.dart';
+import 'package:top_jobs/view/widget/company_info_widgets.dart';
 import 'package:top_jobs/view/widget/containers_widget.dart';
 import 'package:top_jobs/view/widget/designer_info.dart';
 
@@ -196,18 +197,39 @@ class _SearchScreenState extends State<SearchScreen> {
               itemBuilder: (context, index) {
                 final job = filteredJobs[index];
                 print(job);
+
                 return Column(
                   children: [
                     for (var i in filteredJobs)
-                      DesignerInfo(
-                        date:
-                            """${DateTime.now().difference(job.time).inDays != 0 ? DateTime.now().difference(job.time).inDays : DateTime.now().difference(job.time).inHours} ${DateTime.now().difference(job.time).inDays != 0 ? "days ago" : "hours ago"}""",
-                        image: job.companyImage,
-                        money: job.salary,
-                        subTitle: "${job.shortLocation} ",
-                        title1: job.jobTile,
-                        title2: job.jobInfo,
-                        title: job.jobName,
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (ctx) => CompanyInfoWidgets(
+                                    companyImage: job.companyImage,
+                                    title: job.jobName,
+                                    title1: job.jobName,
+                                    title3: job.time.toString(),
+                                    title2: job.shortLocation,
+                                    conpanyLocation: AppImages.Mapp,
+                                    conpanyBio:
+                                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem ...",
+                                  ),
+                            ),
+                          );
+                        },
+                        child: DesignerInfo(
+                          date:
+                              """${DateTime.now().difference(job.time).inDays != 0 ? DateTime.now().difference(job.time).inDays : DateTime.now().difference(job.time).inHours} ${DateTime.now().difference(job.time).inDays != 0 ? "days ago" : "hours ago"}""",
+                          image: job.companyImage,
+                          money: job.salary,
+                          subTitle: "${job.shortLocation} ",
+                          title1: job.jobTile,
+                          title2: job.jobInfo,
+                          title: job.jobName,
+                        ),
                       ),
                   ],
                 );
