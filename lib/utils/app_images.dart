@@ -37,6 +37,8 @@ class AppImages {
   static const arrow_back_icon = "assets/svgs/Ba.svg";
   static const google_1 = "assets/svgs/google_1.svg";
   static const apply = "assets/svgs/Apply Now.svg";
+  static const filter = "assets/svgs/Filter.svg";
+  static const salary = "assets/svgs/Salary.svg";
 
   
 

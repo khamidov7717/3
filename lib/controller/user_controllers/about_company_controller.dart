@@ -1,13 +1,26 @@
 import 'package:top_jobs/datasource/remoute_datasource/admin_datasource/about_company_datasource.dart';
+import 'package:top_jobs/model/admins/about_company_model.dart';
 
-class AboutCompanyController {
-  final String contact;
-  AboutCompanyController({required this.contact});
+class AdminAboutCompanyController {
+  final AboutCompanyDatasource _datasource;
 
-  AboutCompanyDatasource getInsatce(){
-    return AboutCompanyDatasource(contact: contact);
+  AdminAboutCompanyController({required String contact})
+    : _datasource = AboutCompanyDatasource(contact: contact);
+
+  Future<AboutCompanyModel> getAboutcompanyData() async {
+    final data = await _datasource.getData();
+    return data;
   }
-  Future<AboutCompanyModel> (){
-    return getInsatce().getData();
+  Future<void> saveAboutcampanyData({
+    required AboutCompanyModel aboutCompanyModel,
+  }) async {
+    await _datasource.setData(aboutCompanyModel: aboutCompanyModel);
+  }
+
+  Future<void> editAboutcompanyData({
+    required String id,
+    required AboutCompanyModel aboutCompanyModel,
+  }) async {
+    await _datasource.editData(aboutCompanyModel: aboutCompanyModel);
   }
 }

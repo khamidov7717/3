@@ -50,8 +50,10 @@ class _DesignerInfoState extends State<DesignerInfo> {
               children: [
                 CircleAvatar(
                   radius: 35,
-
-                  child: Center(child: Image.network(widget.image)),
+                  backgroundColor: Colors.white,
+                  child: ClipOval(
+                    child: Image.network(widget.image, fit: BoxFit.cover),
+                  ),
                 ),
                 IconButton(
                   onPressed: () {
