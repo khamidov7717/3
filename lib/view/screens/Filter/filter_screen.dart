@@ -18,12 +18,13 @@ class _FilterScreenState extends State<FilterScreen> {
 
   RangeValues isTrue = RangeValues(20, 50);
   @override
+  
   Widget build(BuildContext context) {
     final double w = ScreenSize.widthFactor(context);
     final double h = ScreenSize.heightFactor(context);
     double maxSalary = 0;
     double minSalary = 0;
-
+    
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -49,7 +50,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   SizedBox(height: 10),
                   RangeSlider(
                     values: isTrue,
-                    max: 100,
+                    max: 100000,
                     min: 0,
                     onChanged: (RangeValues value) {
                       setState(() {
@@ -71,6 +72,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   Text("Search", style: TextStyle(fontWeight: FontWeight.bold)),
                   SizedBox(height: 10),
                   TextFormField(
+                    controller: searchControllerr,
                     decoration: InputDecoration(
                       hintText: "Search",
                       border: OutlineInputBorder(
@@ -90,6 +92,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   ),
                   SizedBox(height: 10),
                   TextFormField(
+                    controller: locationControllerr,
                     decoration: InputDecoration(
                       hintText: "Location",
                       border: OutlineInputBorder(
@@ -131,5 +134,6 @@ class _FilterScreenState extends State<FilterScreen> {
         ),
       ),
     );
+    
   }
 }

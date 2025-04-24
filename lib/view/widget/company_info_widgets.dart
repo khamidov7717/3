@@ -35,7 +35,9 @@ class CompanyInfoWidgets extends StatefulWidget {
 
 class _CompanyInfoWidgetsState extends State<CompanyInfoWidgets> {
   late AboutCompanyModel data;
+  
   bool show = false;
+  
 
   @override
   void initState() {
@@ -58,9 +60,11 @@ class _CompanyInfoWidgetsState extends State<CompanyInfoWidgets> {
 
     super.initState();
   }
+  
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
