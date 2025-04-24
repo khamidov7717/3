@@ -14,7 +14,7 @@ class _ProfileDialogWidget extends State<ProfileDialogWidget> {
   final String phoneNumber = "Phone Number";
   final String birthDay = "Birth day";
   final String image = "Image";
-  TextEditingController _genderController = TextEditingController();
+  final TextEditingController _genderController = TextEditingController();
 
   final forumKey = GlobalKey<FormState>();
   @override

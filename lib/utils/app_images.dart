@@ -39,6 +39,7 @@ class AppImages {
   static const apply = "assets/svgs/Apply Now.svg";
   static const filter = "assets/svgs/Filter.svg";
   static const salary = "assets/svgs/Salary.svg";
+  static const illustration = "assets/svgs/Illustration.svg";
 
   
 

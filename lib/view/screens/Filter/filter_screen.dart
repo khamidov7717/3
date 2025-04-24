@@ -5,7 +5,7 @@ import 'package:top_jobs/utils/screen_size_utils.dart';
 import 'package:top_jobs/view/screens/search_screen.dart';
 
 class FilterScreen extends StatefulWidget {
-  FilterScreen({super.key});
+  const FilterScreen({super.key});
 
   @override
   State<FilterScreen> createState() => _FilterScreenState();

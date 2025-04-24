@@ -11,7 +11,7 @@ class DesignerInfo extends StatefulWidget {
   final String money;
   final String title2;
 
-  DesignerInfo({
+  const DesignerInfo({
     super.key,
     required this.date,
     required this.image,

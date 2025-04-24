@@ -16,7 +16,7 @@ class CompanyInfoWidgets extends StatefulWidget {
   final String conpanyLocation;
   final String companyId;
 
-  CompanyInfoWidgets({
+  const CompanyInfoWidgets({
     super.key,
 
     required this.companyId,
@@ -64,7 +64,6 @@ class _CompanyInfoWidgetsState extends State<CompanyInfoWidgets> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -191,7 +190,7 @@ class _CompanyInfoWidgetsState extends State<CompanyInfoWidgets> {
                                     ),
                                     child: Row(
                                       children: [
-                                        Text("${data.location}"),
+                                        Text(data.location),
                                         SizedBox(width: 10),
 
                                         Text(

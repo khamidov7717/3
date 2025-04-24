@@ -5,7 +5,7 @@ class ChipWidget extends StatelessWidget {
   final bool selected;
   final void Function(bool) onSelected;
 
-  ChipWidget({
+  const ChipWidget({
     super.key,
     required this.chipTitle,
     required this.selected,

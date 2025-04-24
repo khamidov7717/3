@@ -130,7 +130,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    void _resetFilters() {
+    void resetFilters() {
       setState(() {
         selectedChips.clear();
         widget.max = double.infinity;
@@ -181,7 +181,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       decoration: InputDecoration(
                         hintText: "Search",
                         suffixIcon: IconButton(
-                          onPressed: _resetFilters,
+                          onPressed: resetFilters,
                           icon: Icon(Icons.close, color: Color(0xffAAA6B9)),
                         ),
                         prefixIcon: IconButton(
@@ -212,7 +212,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           color: Color(0xffFF9228),
                         ),
                         suffixIcon: IconButton(
-                          onPressed: _resetFilters,
+                          onPressed: resetFilters,
                           icon: Icon(Icons.close, color: Color(0xffAAA6B9)),
                         ),
                         border: OutlineInputBorder(
@@ -282,53 +282,52 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           Expanded(
             child:
-            // _isLoad == f
-            //     ? Center(child: CircularProgressIndicator())
-            // :
-            ListView.builder(
-              itemCount: filteredJobs.length,
-              itemBuilder: (context, index) {
-                final job = filteredJobs[index];
-
-                return Column(
-                  children: [
-                    for (var i in filteredJobs)
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (ctx) => CompanyInfoWidgets(
-                                    companyId: job.companyId,
-
-                                    companyImage: job.companyImage,
-                                    title: job.jobName,
-                                    title1: job.jobName,
-                                    title3: job.time.toString(),
-                                    title2: job.shortLocation,
-                                    conpanyLocation: AppImages.Mapp,
-                                    conpanyBio:
-                                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem ...",
-                                  ),
-                            ),
-                          );
-                        },
-                        child: DesignerInfo(
-                          date:
-                              """${DateTime.now().difference(job.time).inDays != 0 ? DateTime.now().difference(job.time).inDays : DateTime.now().difference(job.time).inHours} ${DateTime.now().difference(job.time).inDays != 0 ? "days ago" : "hours ago"}""",
-                          image: job.companyImage,
-                          money: job.salary,
-                          subTitle: "${job.shortLocation} ",
-                          title1: job.jobTile,
-                          title2: job.jobInfo,
-                          title: job.jobName,
-                        ),
-                      ),
-                  ],
-                );
-              },
-            ),
+                _isLoad == true
+                    ? Center(child: CircularProgressIndicator())
+                    : filteredJobs.isEmpty
+                    ? Center(child: Text("Ma'lumot topilmadi"))
+                    : ListView.builder(
+                      itemCount: filteredJobs.length,
+                      itemBuilder: (context, index) {
+                        final job = filteredJobs[index];
+                        return Column(
+                          children: [
+                            for (var i in filteredJobs)
+                              InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder:
+                                          (ctx) => CompanyInfoWidgets(
+                                            companyId: job.companyId,
+                                            companyImage: job.companyImage,
+                                            title: job.jobName,
+                                            title1: job.jobName,
+                                            title3: job.time.toString(),
+                                            title2: job.shortLocation,
+                                            conpanyLocation: AppImages.Mapp,
+                                            conpanyBio:
+                                                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem ...",
+                                          ),
+                                    ),
+                                  );
+                                },
+                                child: DesignerInfo(
+                                  date:
+                                      """${DateTime.now().difference(job.time).inDays != 0 ? DateTime.now().difference(job.time).inDays : DateTime.now().difference(job.time).inHours} ${DateTime.now().difference(job.time).inDays != 0 ? "days ago" : "hours ago"}""",
+                                  image: job.companyImage,
+                                  money: job.salary,
+                                  subTitle: "${job.shortLocation} ",
+                                  title1: job.jobTile,
+                                  title2: job.jobInfo,
+                                  title: job.jobName,
+                                ),
+                              ),
+                          ],
+                        );
+                      },
+                    ),
           ),
         ],
       ),
