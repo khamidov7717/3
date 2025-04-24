@@ -35,9 +35,8 @@ class CompanyInfoWidgets extends StatefulWidget {
 
 class _CompanyInfoWidgetsState extends State<CompanyInfoWidgets> {
   late AboutCompanyModel data;
-  
+
   bool show = false;
-  
 
   @override
   void initState() {
@@ -60,7 +59,6 @@ class _CompanyInfoWidgetsState extends State<CompanyInfoWidgets> {
 
     super.initState();
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +85,7 @@ class _CompanyInfoWidgetsState extends State<CompanyInfoWidgets> {
                             backgroundColor: Colors.white,
                             child: ClipOval(
                               child: Image.network(
-                                data.companyImage,
+                                widget.companyImage,
                                 width: 100,
                                 height: 300,
                                 fit: BoxFit.cover,

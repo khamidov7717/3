@@ -16,8 +16,7 @@ Widget build(BuildContext context) {
       dark: ThemeData.dark(),
       initial: AdaptiveThemeMode.system,
       
-      builder: (context, ctx) {
-        
+      builder: (context, ctx) {        
         return MaterialApp(
         theme: ctx,  
           debugShowCheckedModeBanner: false, home: SearchScreen());

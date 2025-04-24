@@ -290,41 +290,39 @@ class _SearchScreenState extends State<SearchScreen> {
                       itemCount: filteredJobs.length,
                       itemBuilder: (context, index) {
                         final job = filteredJobs[index];
-                        return Column(
-                          children: [
-                            for (var i in filteredJobs)
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder:
-                                          (ctx) => CompanyInfoWidgets(
-                                            companyId: job.companyId,
-                                            companyImage: job.companyImage,
-                                            title: job.jobName,
-                                            title1: job.jobName,
-                                            title3: job.time.toString(),
-                                            title2: job.shortLocation,
-                                            conpanyLocation: AppImages.Mapp,
-                                            conpanyBio:
-                                                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem ...",
-                                          ),
-                                    ),
-                                  );
-                                },
-                                child: DesignerInfo(
-                                  date:
-                                      """${DateTime.now().difference(job.time).inDays != 0 ? DateTime.now().difference(job.time).inDays : DateTime.now().difference(job.time).inHours} ${DateTime.now().difference(job.time).inDays != 0 ? "days ago" : "hours ago"}""",
-                                  image: job.companyImage,
-                                  money: job.salary,
-                                  subTitle: "${job.shortLocation} ",
-                                  title1: job.jobTile,
-                                  title2: job.jobInfo,
-                                  title: job.jobName,
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (ctx) => CompanyInfoWidgets(
+                                        companyId: job.companyId,
+                                        companyImage: job.companyImage,
+                                        title: job.jobName,
+                                        title1: job.jobName,
+                                        title3: job.time.toString(),
+                                        title2: job.shortLocation,
+                                        conpanyLocation: AppImages.Mapp,
+                                        conpanyBio:
+                                            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem ...",
+                                      ),
                                 ),
-                              ),
-                          ],
+                              );
+                            },
+                            child: DesignerInfo(
+                              date:
+                                  """${DateTime.now().difference(job.time).inDays != 0 ? DateTime.now().difference(job.time).inDays : DateTime.now().difference(job.time).inHours} ${DateTime.now().difference(job.time).inDays != 0 ? "days ago" : "hours ago"}""",
+                              image: job.companyImage,
+                              money: job.salary,
+                              subTitle: "${job.shortLocation} ",
+                              title1: job.jobTile,
+                              title2: job.jobInfo,
+                              title: job.jobName,
+                            ),
+                          ),
                         );
                       },
                     ),
